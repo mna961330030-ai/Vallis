@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vallis | Sustentabilidade Premium</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{background:#000;color:#fff;}
@@ -17,7 +15,6 @@ padding:20px 8%;position:fixed;width:100%;
 background:#000;border-bottom:1px solid #222;z-index:1000;
 }
 header h1{color:#00ff88;}
-
 .cart-btn{
 background:#00ff88;border:none;padding:10px 18px;
 border-radius:25px;cursor:pointer;font-weight:600;
@@ -29,77 +26,146 @@ justify-content:center;align-items:center;text-align:center;
 background:linear-gradient(to bottom,#000,#003d22);
 }
 
-.products{padding:100px 8%;}
-.products h2{text-align:center;margin-bottom:50px;color:#00ff88;}
+.products{padding:120px 8%;}
+.products h2{text-align:center;margin-bottom:30px;color:#00ff88;}
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
 }
 
 .card{
-background:#111;padding:25px;border-radius:20px;
+background:#111;padding:20px;border-radius:18px;
 text-align:center;transition:.3s;position:relative;
 }
-.card:hover{transform:translateY(-8px);box-shadow:0 0 20px #00ff8850;}
+.card:hover{transform:translateY(-6px);box-shadow:0 0 15px #00ff8850;}
 
-.card img{
-width:100%;
-max-width:180px;
-height:120px;
-object-fit:cover;
-border-radius:12px;
-margin-bottom:15px;
+.featured{
+border:2px solid #00ff88;
+transform:scale(1.05);
+box-shadow:0 0 25px #00ff8860;
+animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+from{box-shadow:0 0 15px #00ff8840;}
+to{box-shadow:0 0 35px #00ff88;}
 }
 
+.featured-badge{
+position:absolute;top:-12px;right:-12px;
+background:#00ff88;color:#000;font-size:12px;
+font-weight:700;padding:6px 10px;border-radius:12px;
+}
 
-.old-price{text-decoration:line-through;color:#777;}
-.new-price{color:#00ff88;font-size:18px;font-weight:600;margin-bottom:10px;}
+.promo-badge{
+position:absolute;top:10px;left:10px;
+background:#00ff88;color:#000;font-size:12px;
+font-weight:700;padding:4px 8px;border-radius:6px;
+}
 
-.promo{
-position:absolute;
-top:10px;left:10px;
-background:red;padding:5px 10px;
-border-radius:8px;font-size:12px;font-weight:600;
+.new-badge{
+position:absolute;top:-12px;left:-12px;
+background:#ff3b3b;color:#fff;font-size:11px;
+font-weight:700;padding:6px 10px;border-radius:12px;
+animation:pulseNew 1.2s infinite;
+}
+@keyframes pulseNew{
+0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,59,59,.7);}
+70%{transform:scale(1.05);box-shadow:0 0 0 10px rgba(255,59,59,0);}
+100%{transform:scale(1);}
+}
+
+.old-price{text-decoration:line-through;color:#888;font-size:14px;}
+.promo-price{color:#00ff88;font-weight:700;font-size:18px;}
+
+.card img{
+width:160px;height:100px;object-fit:cover;
+border-radius:10px;margin-bottom:12px;
 }
 
 .card button{
-width:100%;margin-top:8px;background:#00ff88;
-border:none;padding:10px;border-radius:20px;
+width:100%;margin-top:6px;background:#00ff88;
+border:none;padding:9px;border-radius:20px;
 cursor:pointer;font-weight:600;
 }
 
-.cart-sidebar{
-position:fixed;top:0;right:-400px;width:350px;height:100%;
-background:#111;box-shadow:-5px 0 20px rgba(0,0,0,.5);
-padding:20px;transition:.4s;z-index:2000;
-display:flex;flex-direction:column;
+.overlay{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,.6);display:none;z-index:1999;
 }
-.cart-sidebar.active{right:0;}
+.overlay.active{display:block;}
 
-.cart-items{flex:1;overflow-y:auto;}
+.cart-modal,.pix-modal{
+position:fixed;top:50%;left:50%;
+transform:translate(-50%,-50%) scale(.9);
+width:340px;max-height:85vh;
+background:#111;border-radius:18px;
+padding:18px;z-index:2000;
+display:none;flex-direction:column;
+box-shadow:0 0 30px rgba(0,0,0,.8);
+transition:.3s;
+}
+.cart-modal.active,.pix-modal.active{
+display:flex;
+transform:translate(-50%,-50%) scale(1);
+}
 
+.cart-items{flex:1;overflow-y:auto;margin-top:10px;}
 .cart-items li{
-display:flex;justify-content:space-between;margin-bottom:10px;
+display:flex;justify-content:space-between;
+align-items:center;background:#1a1a1a;
+padding:8px;border-radius:8px;margin-bottom:6px;font-size:14px;
 }
 
-input{
+.qty{display:flex;align-items:center;gap:6px;}
+.qty button{
+width:24px;height:24px;border:none;
+border-radius:6px;background:#00ff88;
+cursor:pointer;font-weight:700;
+}
+
+.pix-modal img{
+width:220px;height:220px;
+background:#fff;padding:10px;
+border-radius:12px;margin:15px auto;
+}
+
+input,select{
 width:100%;padding:8px;margin-top:8px;
-border:none;border-radius:8px;background:#1a1a1a;color:#fff;
-}
-
-.remove-btn{
-background:red;border:none;color:white;
-padding:3px 8px;border-radius:8px;cursor:pointer;
+border:none;border-radius:8px;
+background:#1a1a1a;color:#fff;
 }
 
 .total{margin:10px 0;font-weight:600;}
 
+/* ===== TELA DE SUCESSO ===== */
+.success-screen{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:#000;display:flex;justify-content:center;
+align-items:center;z-index:3000;
+opacity:0;visibility:hidden;transition:.4s;
+}
+.success-screen.active{
+opacity:1;visibility:visible;
+}
+.success-content{text-align:center;}
+.checkmark{
+width:120px;height:120px;border-radius:50%;
+background:#00ff88;color:#000;font-size:60px;
+display:flex;align-items:center;justify-content:center;
+margin:0 auto 20px;
+}
+.success-content h2{color:#00ff88;}
+.success-content button{
+margin-top:20px;padding:12px 25px;
+border:none;border-radius:25px;
+background:#00ff88;font-weight:600;cursor:pointer;
+}
+
 footer{text-align:center;padding:30px;color:#666;}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -114,138 +180,202 @@ footer{text-align:center;padding:30px;color:#666;}
 <p>Ingredientes orgânicos e sabor premium.</p>
 </section>
 
+<!-- COMIDAS -->
 <section class="products">
-<h2>Nossos Produtos</h2>
-
+<h2>🍽️ Comidas</h2>
 <div class="grid">
-
-<div class="card">
-    <img src="Espeto.jpeg" alt="">
-<div class="promo">PROMO</div>
-<h3>Espeto</h3>
-<p class="old-price">R$ 29.90</p>
-<p class="new-price">R$ 22.90</p>
-<button onclick="addToCart(1,'Salada Vallis',22.9)">Adicionar</button>
-<button onclick="buyNow(1,'Salada Vallis',22.9)">Comprar Rápido</button>
+<!-- Produto exemplo -->
+<div class="card featured">
+<div class="featured-badge">⭐ MAIS PEDIDO</div>
+<div class="promo-badge">PROMOÇÃO</div>
+<img src="Espeto.jpeg">
+<h3>Espeto Veggie Fire</h3>
+<p class="old-price">R$ 22.90</p>
+<p class="promo-price">R$ 17.90</p>
+<button onclick="addToCart(1,'Espeto Veggie Fire',17.9,'Comida')">Adicionar</button>
 </div>
 
 <div class="card">
-    <img src="Salada.jpeg" alt="">
-<h3>Salada fresh</h3>
-<p>R$ 34.90</p>
-<button onclick="addToCart(2,'Bowl Verde Premium',34.9)">Adicionar</button>
-<button onclick="buyNow(2,'Bowl Verde Premium',34.9)">Comprar Rápido</button>
-</div>
-
-<div class="card">
-    <img src="Taco tropical.jpeg" alt="">
-<div class="promo">PROMO</div>
+<img src="Taco tropical.jpeg">
 <h3>Taco Tropical</h3>
-<p class="old-price">R$ 14.90</p>
-<p class="new-price">R$ 9.90</p>
-<button onclick="addToCart(3,'Suco Detox Natural',9.9)">Adicionar</button>
-<button onclick="buyNow(3,'Suco Detox Natural',9.9)">Comprar Rápido</button>
+<p>R$ 29.90</p>
+<button onclick="addToCart(3,'Taco Tropical',29.9,'Comida')">Adicionar</button>
 </div>
 
 <div class="card">
-    <img src="Sweet Green.jpeg" alt="">
-<h3>Sweet Green</h3>
-<p>R$ 27.90</p>
-<button onclick="addToCart(4,'Wrap Vegano Especial',27.9)">Adicionar</button>
-<button onclick="buyNow(4,'Wrap Vegano Especial',27.9)">Comprar Rápido</button>
-</div>
-
-<div class="card">
-    <img src="Power Green.jpeg" alt="">
-<div class="promo">PROMO</div>
-<h3>Power Green</h3>
+<div class="promo-badge">PROMOÇÃO</div>
+<img src="Salada.jpeg">
+<h3>Salada Orgânica</h3>
 <p class="old-price">R$ 19.90</p>
-<p class="new-price">R$ 14.90</p>
-<button onclick="addToCart(5,'Smoothie Energético Verde',14.9)">Adicionar</button>
-<button onclick="buyNow(5,'Smoothie Energético Verde',14.9)">Comprar Rápido</button>
+<p class="promo-price">R$ 15.90</p>
+<button onclick="addToCart(4,'Salada Orgânica ',15.9,'Comida')">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="Sweet Green.jpeg">
+<h3>Sweet Green</h3>
+<p>R$ 24.90</p>
+<button onclick="addToCart(5,'Sweet Green',24.9,'Comida')">Adicionar</button>
+</div>
+
+<div class="card">
+<img src="Power Green.jpeg">
+<h3>Power Green</h3>
+<p>R$ 25.90</p>
+<button onclick="addToCart(5,'Wrap Natural Green',24.9,'Comida')">Adicionar</button>
 </div>
 
 </div>
 </section>
 
-<div class="cart-sidebar" id="cartSidebar">
+<!-- BEBIDAS -->
+<section class="products">
+<h2>🥤 Bebidas</h2>
+<div class="grid">
+<div class="card">
+<img src="Vermelho.jpeg">
+<h3>Suco Detox Green</h3>
+<p>R$ 14.90</p>
+<button onclick="addToCart(2,'Suco Detox Green',14.9,'Bebida')">Adicionar</button>
+</div>
+<div class="card featured">
+<div class="featured-badge">⭐ MAIS VENDIDO</div>
+<img src="Sucodetox.jpeg">
+<h3>Suco Detox Green Especial</h3>
+<p>R$ 17.90</p>
+<button onclick="addToCart(6,'Suco Detox Green Especial',17.9,'Bebida')">Adicionar</button>
+</div>
+<div class="card">
+<div class="new-badge">NOVO</div>
+<img src="Abacaxi.jpeg">
+<h3>Smoothie de Morango Natural</h3>
+<p>R$ 16.90</p>
+<button onclick="addToCart(7,'Smoothie de Morango Natural',16.9,'Bebida')">Adicionar</button>
+</div>
+</div>
+</section>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<div class="cart-modal" id="cartModal">
 <h3>Seu Carrinho</h3>
-
 <ul class="cart-items" id="cartItems"></ul>
-
 <p class="total">Total: R$ <span id="totalPrice">0.00</span></p>
 
-<input type="text" id="coupon" placeholder="Cupom (VALLIS10)">
-<input type="text" placeholder="Nome completo">
-<input type="email" placeholder="Email">
-<input type="text" placeholder="Endereço">
+<input type="text" id="nome" placeholder="Nome completo">
+<input type="text" id="telefone" placeholder="Telefone">
+<input type="text" id="endereco" placeholder="Endereço">
 
-<button onclick="finalizarCompra()">Finalizar Compra</button>
-<button onclick="toggleCart()">Fechar</button>
+<select id="payment">
+<option value="">Forma de pagamento</option>
+<option>Pix</option>
+<option>Cartão</option>
+<option>Boleto</option>
+</select>
+
+<button onclick="finalizarCompra()">Finalizar Pedido</button>
 </div>
 
-<footer>
-© 2026 Vallis — Sustentabilidade Premium
-</footer>
+<div class="pix-modal" id="pixModal">
+<h3>Pagamento via Pix</h3>
+<p>Escaneie o QR Code abaixo:</p>
+<img id="qrImage">
+<input type="text" id="pixCode" readonly style="font-size:12px;margin-top:10px;">
+<button onclick="copiarPix()">Copiar Código</button>
+</div>
+
+<div class="success-screen" id="successScreen">
+<div class="success-content">
+<div class="checkmark">✓</div>
+<h2>Compra Concluída!</h2>
+<p>Seu pagamento foi confirmado com sucesso.</p>
+<button onclick="fecharSucesso()">Voltar ao início</button>
+</div>
+</div>
+
+<footer>© 2026 Vallis — Sustentabilidade Premium</footer>
 
 <script>
 let cart=[];
-let discount=0;
 
-function toggleCart(){
-document.getElementById("cartSidebar").classList.toggle("active");
-}
+function toggleCart(){document.getElementById("cartModal").classList.toggle("active");document.getElementById("overlay").classList.toggle("active");}
+function closeAll(){document.getElementById("cartModal").classList.remove("active");document.getElementById("pixModal").classList.remove("active");document.getElementById("overlay").classList.remove("active");}
 
-function addToCart(id,name,price){
+function addToCart(id,name,price,category){
 const item=cart.find(p=>p.id===id);
-if(item){item.quantity++;}
-else{cart.push({id,name,price,quantity:1});}
-updateCart();
-}
-
-function buyNow(id,name,price){
-cart=[{id,name,price,quantity:1}];
+if(item){item.quantity++;}else{cart.push({id,name,price,category,quantity:1});}
 updateCart();
 toggleCart();
+}
+
+function changeQty(id,change){
+const item=cart.find(p=>p.id===id);
+if(!item)return;
+item.quantity+=change;
+if(item.quantity<=0){cart=cart.filter(i=>i.id!==id);}
+updateCart();
 }
 
 function updateCart(){
 const list=document.getElementById("cartItems");
 list.innerHTML="";
 let total=0;
-
 cart.forEach(item=>{
 total+=item.price*item.quantity;
-const li=document.createElement("li");
-li.innerHTML=`${item.name} (${item.quantity})
-<button class="remove-btn" onclick="removeItem(${item.id})">X</button>`;
-list.appendChild(li);
+list.innerHTML+=`<li>${item.name}<div class="qty"><button onclick="changeQty(${item.id},-1)">−</button>${item.quantity}<button onclick="changeQty(${item.id},1)">+</button></div></li>`;
 });
-
-const coupon=document.getElementById("coupon").value;
-discount=0;
-
-if(coupon==="VALLIS10"){
-discount=total*0.10;
-}
-
-document.getElementById("totalPrice").innerText=(total-discount).toFixed(2);
-document.getElementById("cartCount").innerText=
-cart.reduce((s,i)=>s+i.quantity,0);
-}
-
-function removeItem(id){
-cart=cart.filter(item=>item.id!==id);
-updateCart();
+document.getElementById("totalPrice").innerText=total.toFixed(2);
+document.getElementById("cartCount").innerText=cart.reduce((s,i)=>s+i.quantity,0);
 }
 
 function finalizarCompra(){
+const nome=document.getElementById("nome").value;
+const telefone=document.getElementById("telefone").value;
+const endereco=document.getElementById("endereco").value;
+const payment=document.getElementById("payment").value;
+
+if(!nome||!telefone||!endereco){alert("Preencha seus dados");return;}
+if(payment===""){alert("Escolha a forma de pagamento");return;}
+if(payment==="Pix"){document.getElementById("cartModal").classList.remove("active");gerarPix();return;}
 alert("Pedido realizado com sucesso 🌱");
-cart=[];
-updateCart();
-toggleCart();
+cart=[];updateCart();closeAll();
+}
+
+function gerarPix(){
+const codigoPix="00020126580014BR.GOV.BCB.PIX0136chavepix@vallis.com520400005303986540517.905802BR5920VALLIS6009SAO PAULO6304ABCD";
+document.getElementById("pixCode").value=codigoPix;
+document.getElementById("qrImage").src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(codigoPix);
+document.getElementById("overlay").classList.add("active");
+document.getElementById("pixModal").classList.add("active");
+
+/* STATUS AGUARDANDO */
+const status=document.createElement("p");
+status.id="pixStatus";status.style.marginTop="10px";status.style.color="#00ff88";status.innerText="⏳ Aguardando pagamento...";
+document.getElementById("pixModal").appendChild(status);
+
+/* CONFIRMAÇÃO AUTOMÁTICA */
+setTimeout(()=>{
+status.innerText="✅ Pagamento confirmado!";status.style.color="#00ff88";
+setTimeout(()=>{mostrarSucesso();},2000);
+},4000);
+}
+
+function mostrarSucesso(){
+cart=[];updateCart();
+document.getElementById("pixModal").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
+document.getElementById("successScreen").classList.add("active");
+}
+
+function fecharSucesso(){document.getElementById("successScreen").classList.remove("active");}
+
+function copiarPix(){
+const pixInput=document.getElementById("pixCode");
+pixInput.select();
+pixInput.setSelectionRange(0,99999);
+document.execCommand("copy");
+alert("Código Pix copiado!");
 }
 </script>
-
 </body>
 </html>
